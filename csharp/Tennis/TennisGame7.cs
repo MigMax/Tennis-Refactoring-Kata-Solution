@@ -60,24 +60,23 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
     {
         var result = string.Empty;
         
-        result += _player1Score switch
-        {
-            0 => "Love",
-            1 => "Fifteen",
-            2 => "Thirty",
-            _ => "Forty"
-        };
+        result += GetScoreLabel(_player1Score);
 
         result += "-";
-
-        result += _player2Score switch
+        
+        result += GetScoreLabel(_player2Score);
+        
+        return result;
+    }
+    
+    private static string GetScoreLabel(int score)
+    {
+        return score switch
         {
             0 => "Love",
             1 => "Fifteen",
             2 => "Thirty",
             _ => "Forty"
         };
-        
-        return result;
     }
 }
