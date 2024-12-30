@@ -14,4 +14,8 @@ public class GameScore
     {
         Player2++;
     }
+    
+    public bool IsTie => Player1 == Player2;
+    
+    public bool IsEndGame => Player1 >= 4 || Player2 >= 4;
 }

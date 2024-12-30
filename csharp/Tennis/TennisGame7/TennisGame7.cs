@@ -20,12 +20,12 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
 
     private string GetScoreByContext()
     {
-        if (IsTie)
+        if (_score.IsTie)
         {
             return GetTieScore();
         }
 
-        if (IsEndGame)
+        if (_score.IsEndGame)
         {
             return GetEndGameScore();
         }
@@ -33,8 +33,7 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         return GetRegularScore();
     }
 
-    private bool IsTie => _score.Player1 == _score.Player2;
-    private bool IsEndGame => _score.Player1 >= 4 || _score.Player2 >= 4;
+
     
     private string GetTieScore() => _score.Player1 switch
     {
