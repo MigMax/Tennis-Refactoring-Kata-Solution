@@ -1,34 +1,30 @@
 namespace Tennis;
 
-public class TennisGame7 : ITennisGame
+public class TennisGame7(string player1Name, string player2Name) : ITennisGame
 {
-    private int player1Score;
-    private int player2Score;
-    private string player1Name;
-    private string player2Name;
-
-    public TennisGame7(string player1Name, string player2Name)
-    {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
-    }
+    private int _player1Score;
+    private int _player2Score;
 
     public void WonPoint(string playerName)
     {
         if (playerName == player1Name)
-            player1Score++;
+        {
+            _player1Score++;
+        }
         else
-            player2Score++;
+        {
+            _player2Score++;
+        }
     }
 
     public string GetScore()
     {
         string result = "Current score: ";
 
-        if (player1Score == player2Score)
+        if (_player1Score == _player2Score)
         {
             // tie score
-            switch (player1Score)
+            switch (_player1Score)
             {
                 case 0:
                     result += "Love-All";
@@ -44,10 +40,10 @@ public class TennisGame7 : ITennisGame
                     break;
             }
         }
-        else if (player1Score >= 4 || player2Score >= 4)
+        else if (_player1Score >= 4 || _player2Score >= 4)
         {
             // end-game score
-            switch (player1Score - player2Score)
+            switch (_player1Score - _player2Score)
             {
                 case 1:
                     result += $"Advantage {player1Name}";
@@ -66,7 +62,7 @@ public class TennisGame7 : ITennisGame
         else
         {
             // regular score
-            result += player1Score switch
+            result += _player1Score switch
             {
                 0 => "Love",
                 1 => "Fifteen",
@@ -76,7 +72,7 @@ public class TennisGame7 : ITennisGame
 
             result += "-";
 
-            result += player2Score switch
+            result += _player2Score switch
             {
                 0 => "Love",
                 1 => "Fifteen",
