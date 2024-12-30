@@ -17,14 +17,7 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         }
     }
 
-    public string GetScore()
-    {
-        string result = "Current score: ";
-
-        result += GetScoreByContext();
-
-        return result + ", enjoy your game!";
-    }
+    public string GetScore() => $"Current score: {GetScoreByContext()}, enjoy your game!";
 
     private string GetScoreByContext()
     {
