@@ -8,11 +8,11 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
     {
         if (playerName == player1Name)
         {
-            _score.Player1++;
+            _score.Player1Won();
         }
         else
         {
-            _score.Player2++;
+            _score.Player2Won();
         }
     }
 
