@@ -2,18 +2,17 @@ namespace Tennis;
 
 public class TennisGame7(string player1Name, string player2Name) : ITennisGame
 {
-    private int _player1Score;
-    private int _player2Score;
+    private readonly GameScore _score = new();
 
     public void WonPoint(string playerName)
     {
         if (playerName == player1Name)
         {
-            _player1Score++;
+            _score.Player1++;
         }
         else
         {
-            _player2Score++;
+            _score.Player2++;
         }
     }
 
@@ -34,10 +33,10 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         return GetRegularScore();
     }
 
-    private bool IsTie => _player1Score == _player2Score;
-    private bool IsEndGame => _player1Score >= 4 || _player2Score >= 4;
+    private bool IsTie => _score.Player1 == _score.Player2;
+    private bool IsEndGame => _score.Player1 >= 4 || _score.Player2 >= 4;
     
-    private string GetTieScore() => _player1Score switch
+    private string GetTieScore() => _score.Player1 switch
     {
         0 => "Love-All",
         1 => "Fifteen-All",
@@ -45,7 +44,7 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         _ => "Deuce"
     };
 
-    private string GetEndGameScore() => (_player1Score - _player2Score) switch
+    private string GetEndGameScore() => (_score.Player1 - _score.Player2) switch
     {
         1 => AdvantageFor(player1Name),
         -1 => AdvantageFor(player2Name),
@@ -64,5 +63,5 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         _ => "Forty"
     };
     
-    private string GetRegularScore() => $"{GetScoreLabel(_player1Score)}-{GetScoreLabel(_player2Score)}";
+    private string GetRegularScore() => $"{GetScoreLabel(_score.Player1)}-{GetScoreLabel(_score.Player2)}";
 }
