@@ -24,40 +24,24 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         if (_player1Score == _player2Score)
         {
             // tie score
-            switch (_player1Score)
+            result += _player1Score switch
             {
-                case 0:
-                    result += "Love-All";
-                    break;
-                case 1:
-                    result += "Fifteen-All";
-                    break;
-                case 2:
-                    result += "Thirty-All";
-                    break;
-                default:
-                    result += "Deuce";
-                    break;
-            }
+                0 => "Love-All",
+                1 => "Fifteen-All",
+                2 => "Thirty-All",
+                _ => "Deuce"
+            };
         }
         else if (_player1Score >= 4 || _player2Score >= 4)
         {
             // end-game score
-            switch (_player1Score - _player2Score)
+            result += (_player1Score - _player2Score) switch
             {
-                case 1:
-                    result += $"Advantage {player1Name}";
-                    break;
-                case -1:
-                    result += $"Advantage {player2Name}";
-                    break;
-                case >= 2:
-                    result += $"Win for {player1Name}";
-                    break;
-                default:
-                    result += $"Win for {player2Name}";
-                    break;
-            }
+                1 => $"Advantage {player1Name}",
+                -1 => $"Advantage {player2Name}",
+                >= 2 => $"Win for {player1Name}",
+                _ => $"Win for {player2Name}"
+            };
         }
         else
         {
