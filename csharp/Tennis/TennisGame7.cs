@@ -21,18 +21,21 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
 
     private string GetScoreByContext()
     {
-        if (_player1Score == _player2Score)
+        if (IsTie)
         {
             return GetTieScore();
         }
 
-        if (_player1Score >= 4 || _player2Score >= 4)
+        if (IsEndGame)
         {
             return GetEndGameScore();
         }
 
         return GetRegularScore();
     }
+
+    private bool IsTie => _player1Score == _player2Score;
+    private bool IsEndGame => _player1Score >= 4 || _player2Score >= 4;
     
     private string GetTieScore() => _player1Score switch
     {
@@ -44,14 +47,15 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
 
     private string GetEndGameScore() => (_player1Score - _player2Score) switch
     {
-        1 => $"Advantage {player1Name}",
-        -1 => $"Advantage {player2Name}",
-        >= 2 => $"Win for {player1Name}",
-        _ => $"Win for {player2Name}"
+        1 => AdvantageFor(player1Name),
+        -1 => AdvantageFor(player2Name),
+        >= 2 => WinFor(player1Name),
+        _ => WinFor(player2Name)
     };
-
-    private string GetRegularScore() => $"{GetScoreLabel(_player1Score)}-{GetScoreLabel(_player2Score)}";
-
+    
+    private static string AdvantageFor(string player) => $"Advantage {player}";
+    private static string WinFor(string player) => $"Win for {player}";
+    
     private static string GetScoreLabel(int score) => score switch 
     {
         0 => "Love",
@@ -59,4 +63,6 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         2 => "Thirty",
         _ => "Forty"
     };
+    
+    private string GetRegularScore() => $"{GetScoreLabel(_player1Score)}-{GetScoreLabel(_player2Score)}";
 }
