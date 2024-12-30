@@ -34,38 +34,29 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         return GetRegularScore();
     }
     
-    private string GetTieScore()
+    private string GetTieScore() => _player1Score switch
     {
-        return _player1Score switch
-        {
-            0 => "Love-All",
-            1 => "Fifteen-All",
-            2 => "Thirty-All",
-            _ => "Deuce"
-        };
-    }
-    
-    private string GetEndGameScore()
+        0 => "Love-All",
+        1 => "Fifteen-All",
+        2 => "Thirty-All",
+        _ => "Deuce"
+    };
+
+    private string GetEndGameScore() => (_player1Score - _player2Score) switch
     {
-        return (_player1Score - _player2Score) switch
-        {
-            1 => $"Advantage {player1Name}",
-            -1 => $"Advantage {player2Name}",
-            >= 2 => $"Win for {player1Name}",
-            _ => $"Win for {player2Name}"
-        };
-    }
-    
+        1 => $"Advantage {player1Name}",
+        -1 => $"Advantage {player2Name}",
+        >= 2 => $"Win for {player1Name}",
+        _ => $"Win for {player2Name}"
+    };
+
     private string GetRegularScore() => $"{GetScoreLabel(_player1Score)}-{GetScoreLabel(_player2Score)}";
 
-    private static string GetScoreLabel(int score)
+    private static string GetScoreLabel(int score) => score switch 
     {
-        return score switch
-        {
-            0 => "Love",
-            1 => "Fifteen",
-            2 => "Thirty",
-            _ => "Forty"
-        };
-    }
+        0 => "Love",
+        1 => "Fifteen",
+        2 => "Thirty",
+        _ => "Forty"
+    };
 }
