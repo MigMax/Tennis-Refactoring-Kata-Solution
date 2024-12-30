@@ -56,19 +56,8 @@ public class TennisGame7(string player1Name, string player2Name) : ITennisGame
         };
     }
     
-    private string GetRegularScore()
-    {
-        var result = string.Empty;
-        
-        result += GetScoreLabel(_player1Score);
+    private string GetRegularScore() => $"{GetScoreLabel(_player1Score)}-{GetScoreLabel(_player2Score)}";
 
-        result += "-";
-        
-        result += GetScoreLabel(_player2Score);
-        
-        return result;
-    }
-    
     private static string GetScoreLabel(int score)
     {
         return score switch
