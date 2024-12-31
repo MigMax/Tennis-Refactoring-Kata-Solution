@@ -2,41 +2,41 @@ namespace Tennis.TennisGame3;
 
 public class TennisGame3(string player1Name, string player2Name) : ITennisGame
 {
-    private int p2;
-    private int p1;
+    private int _player2Score;
+    private int _player1Score;
 
     public string GetScore()
     {
         string s;
         
-        if (p1 < 4 && p2 < 4 && p1 + p2 < 6)
+        if (_player1Score < 4 && _player2Score < 4 && _player1Score + _player2Score < 6)
         {
             string[] p = ["Love", "Fifteen", "Thirty", "Forty"];
             
-            s = p[p1];
+            s = p[_player1Score];
             
-            return p1 == p2 ? s + "-All" : s + "-" + p[p2];
+            return _player1Score == _player2Score ? s + "-All" : s + "-" + p[_player2Score];
         }
 
-        if (p1 == p2)
+        if (_player1Score == _player2Score)
         {
             return "Deuce";
         }
 
-        s = p1 > p2 ? player1Name : player2Name;
+        s = _player1Score > _player2Score ? player1Name : player2Name;
         
-        return (p1 - p2) * (p1 - p2) == 1 ? "Advantage " + s : "Win for " + s;
+        return (_player1Score - _player2Score) * (_player1Score - _player2Score) == 1 ? "Advantage " + s : "Win for " + s;
     }
 
     public void WonPoint(string playerName)
     {
         if (playerName == "player1")
         {
-            p1 += 1;
+            _player1Score += 1;
         }
         else
         {
-            p2 += 1;
+            _player2Score += 1;
         }
     }
 
