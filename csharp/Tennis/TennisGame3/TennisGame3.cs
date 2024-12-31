@@ -7,15 +7,13 @@ public class TennisGame3(string player1Name, string player2Name) : ITennisGame
 
     public string GetScore()
     {
-        string s;
-        
         if (_player1Score < 4 && _player2Score < 4 && _player1Score + _player2Score < 6)
         {
             string[] p = ["Love", "Fifteen", "Thirty", "Forty"];
             
-            s = p[_player1Score];
+            var s1 = p[_player1Score];
             
-            return _player1Score == _player2Score ? s + "-All" : s + "-" + p[_player2Score];
+            return _player1Score == _player2Score ? s1 + "-All" : s1 + "-" + p[_player2Score];
         }
 
         if (_player1Score == _player2Score)
@@ -23,9 +21,9 @@ public class TennisGame3(string player1Name, string player2Name) : ITennisGame
             return "Deuce";
         }
 
-        s = _player1Score > _player2Score ? player1Name : player2Name;
+        var s2 = _player1Score > _player2Score ? player1Name : player2Name;
         
-        return (_player1Score - _player2Score) * (_player1Score - _player2Score) == 1 ? "Advantage " + s : "Win for " + s;
+        return (_player1Score - _player2Score) * (_player1Score - _player2Score) == 1 ? "Advantage " + s2 : "Win for " + s2;
     }
 
     public void WonPoint(string playerName)
